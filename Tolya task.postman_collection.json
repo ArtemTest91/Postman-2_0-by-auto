@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "79dcdb9d-0f02-4450-bbd1-738d0502a54e",
+		"name": "Tolya task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20977620"
+	},
+	"item": [
+		{
+			"name": "Tolya task csv",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let reqData = request.data;\r",
+							"\r",
+							"function checkName (reqData) {\r",
+							"    if (reqData.name.length >=3 && reqData.name.length <=40 && reqData.name.trim() === reqData.name)\r",
+							"{\r",
+							"    return true\r",
+							"    }\r",
+							"return false \r",
+							"};\r",
+							"\r",
+							"function checkAge (reqData) {\r",
+							"    if (Number(reqData.age) >= 18 && Number(reqData.age) <= 120 && Number.isInteger(+reqData.age))\r",
+							" {\r",
+							"    return true\r",
+							"    }\r",
+							"return false \r",
+							"};\r",
+							"\r",
+							"function checkSalary (reqData) {\r",
+							"  if (Number(reqData.salary) >= 1 && Number(reqData.salary) < 10000001 && Number.isInteger(+reqData.salary))\r",
+							" {\r",
+							"    return true\r",
+							"    }\r",
+							"return false \r",
+							"};\r",
+							"\r",
+							"if (checkName(reqData) && checkAge(reqData) && checkSalary(reqData)) {\r",
+							"    pm.test(\"Status code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test (\"Status code is not 200\", function () {\r",
+							"    {pm.response.to.not.have.status(200);\r",
+							"    }\r",
+							" })\r",
+							"};"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "{{age}}",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "{{salary}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "162.55.220.72:5005/user_info_2",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
